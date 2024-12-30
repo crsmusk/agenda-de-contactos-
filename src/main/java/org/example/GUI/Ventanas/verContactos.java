@@ -36,25 +36,25 @@ public class verContactos extends JFrame {
     }
     
     private void initializeComponents() {
-        // Configurar ventana
+       
         setTitle("Lista de Contactos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setMinimumSize(new Dimension(800, 500));
         setLocationRelativeTo(null);
         
-        // Usar MigLayout para mejor organización
+        
         setLayout(new MigLayout("fill, insets 20", "[grow]", "[]10[grow]10[]"));
         
-        // Añadir título
+       
         JLabel titleLabel = new JLabel("Lista de Contactos");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         titleLabel.setForeground(PRIMARY_COLOR);
         add(titleLabel, "center, wrap");
         
-        // Configurar tabla
+       
         setupTable();
         
-        // Añadir panel de estadísticas
+       
         setupStatsPanel();
     }
     
@@ -62,7 +62,7 @@ public class verContactos extends JFrame {
         modeloTabla = new ModeloTabla(contactos);
         tabla = new JTable(modeloTabla);
         
-        // Estilo de tabla
+        
         tabla.setRowHeight(35);
         tabla.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         tabla.setSelectionBackground(new Color(232, 234, 246));
@@ -70,14 +70,14 @@ public class verContactos extends JFrame {
         tabla.setIntercellSpacing(new Dimension(10, 10));
         tabla.setShowGrid(false);
         
-        // Estilo del encabezado
+        
         JTableHeader header = tabla.getTableHeader();
         header.setBackground(PRIMARY_COLOR);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Segoe UI", Font.BOLD, 14));
         header.setPreferredSize(new Dimension(header.getWidth(), 40));
         
-        // Renderizador para centrar el contenido
+       
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -93,7 +93,7 @@ public class verContactos extends JFrame {
             tabla.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         
-        // Scroll Pane
+        
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getViewport().setBackground(Color.WHITE);
@@ -105,17 +105,17 @@ public class verContactos extends JFrame {
         JPanel statsPanel = new JPanel(new MigLayout("insets 0", "[]20[]20[]"));
         statsPanel.setBackground(Color.WHITE);
         
-        // Crear etiquetas de estadísticas
+      
         addStatLabel(statsPanel, "Total de Contactos:", String.valueOf(contactos.size()));
         
-        // Contar contactos con correo
+       
         long contactosConCorreo = contactos.stream()
                 .filter(c -> c.getCorreo() != null && !c.getCorreo().isEmpty())
                 .count();
         addStatLabel(statsPanel, "Con Correo:", contactosConCorreo + " (" + 
                 String.format("%.1f%%", (contactosConCorreo * 100.0 / contactos.size())) + ")");
         
-        // Contar contactos con teléfono
+       
         long contactosConTelefono = contactos.stream()
                 .filter(c -> c.getNumeroDeTelefono() != null && !c.getNumeroDeTelefono().isEmpty())
                 .count();
@@ -178,11 +178,11 @@ public class verContactos extends JFrame {
         }
     }
     
-    // Método para actualizar los datos
+   
     public void actualizarDatos(List<Contacto> nuevosContactos) {
         this.contactos = nuevosContactos;
         modeloTabla = new ModeloTabla(contactos);
         tabla.setModel(modeloTabla);
-        setupStatsPanel(); // Actualizar estadísticas
+        setupStatsPanel(); 
     }
 }
