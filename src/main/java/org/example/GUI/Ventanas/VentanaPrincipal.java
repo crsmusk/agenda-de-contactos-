@@ -23,25 +23,25 @@ public class VentanaPrincipal extends JFrame {
     private static final Color ACCENT_COLOR = new Color(92, 107, 192);
     
     public VentanaPrincipal() {
-        // Configurar tema moderno
+        
         setupLookAndFeel();
         
-        // Configurar ventana principal
+        
         setTitle("Agenda de Contactos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(1000, 600));
         setLocationRelativeTo(null);
         
-        // Usar MigLayout para mejor organización
+       
         setLayout(new MigLayout("fill, insets 20", "[grow]", "[grow][]"));
         
-        // Configurar tabla
+        
         setupTable();
         
-        // Configurar panel de botones
+        
         setupButtonPanel();
         
-        // Agregar barra de búsqueda
+      
         setupSearchBar();
     }
     
@@ -59,8 +59,7 @@ public class VentanaPrincipal extends JFrame {
     private void setupTable() {
         modeloTabla = new ModeloTabla(controlador.getAll());
         tabla = new JTable(modeloTabla);
-        
-        // Estilo de tabla
+       
         tabla.setRowHeight(40);
         tabla.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         tabla.setSelectionBackground(new Color(232, 234, 246));
@@ -68,14 +67,14 @@ public class VentanaPrincipal extends JFrame {
         tabla.setIntercellSpacing(new Dimension(10, 10));
         tabla.setShowGrid(false);
         
-        // Estilo del encabezado
+      
         JTableHeader header = tabla.getTableHeader();
         header.setBackground(PRIMARY_COLOR);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Segoe UI", Font.BOLD, 14));
         header.setPreferredSize(new Dimension(header.getWidth(), 45));
         
-        // Renderizador personalizado para las celdas
+      
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -89,7 +88,7 @@ public class VentanaPrincipal extends JFrame {
             tabla.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         
-        // Panel de desplazamiento personalizado
+        
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getViewport().setBackground(Color.WHITE);
@@ -101,7 +100,7 @@ public class VentanaPrincipal extends JFrame {
         JPanel panelBotones = new JPanel(new MigLayout("insets 0", "[]10[]10[]10[]"));
         panelBotones.setBackground(Color.WHITE);
         
-        // Estilo común para botones
+      
         JButton[] botones = {
             createStyledButton("Borrar", new Color(244, 67, 54)),
             createStyledButton("Actualizar", new Color(33, 150, 243)),
@@ -109,7 +108,7 @@ public class VentanaPrincipal extends JFrame {
             createStyledButton("Refrescar Datos", new Color(156, 39, 176))
         };
         
-        // Agregar acciones a los botones
+        
         botones[0].addActionListener(e -> {
             int selectedRow = tabla.getSelectedRow();
             if (selectedRow != -1) {
@@ -148,7 +147,7 @@ public class VentanaPrincipal extends JFrame {
             mostrarMensaje("Datos actualizados correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         });
         
-        // Agregar botones al panel
+       
         for (JButton boton : botones) {
             panelBotones.add(boton);
         }
@@ -193,7 +192,7 @@ public class VentanaPrincipal extends JFrame {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(150, 40));
         
-        // Efectos hover
+       
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(color.brighter());
@@ -210,7 +209,7 @@ public class VentanaPrincipal extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje, titulo, tipo);
     }
     
-    // La clase ModeloTabla se mantiene igual
+    
     class ModeloTabla extends AbstractTableModel {
         private final String[] columnas = {"Nombre", "Apellido", "Correo", "Numero"};
         private List<Contacto> datos;
